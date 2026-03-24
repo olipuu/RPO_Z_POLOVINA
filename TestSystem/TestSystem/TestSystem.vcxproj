@@ -18,10 +18,23 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+<<<<<<< HEAD
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{231214db-64e7-45de-80f4-cdb7457d4f7c}</ProjectGuid>
+=======
+  <ItemGroup>
+    <ClCompile Include="Tested.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tested.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{ee2e89fb-10a8-4b6b-9460-e518c0d6f8ea}</ProjectGuid>
+>>>>>>> tested-branch
     <RootNamespace>TestSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -126,6 +139,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -133,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="MainMenu.h" />
   </ItemGroup>
+=======
+>>>>>>> tested-branch
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

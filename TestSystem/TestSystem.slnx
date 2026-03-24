@@ -3,5 +3,9 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+<<<<<<< HEAD
   <Project Path="TestSystem/TestSystem.vcxproj" />
+=======
+  <Project Path="TestSystem/TestSystem.vcxproj" Id="ee2e89fb-10a8-4b6b-9460-e518c0d6f8ea" />
+>>>>>>> tested-branch
 </Solution>

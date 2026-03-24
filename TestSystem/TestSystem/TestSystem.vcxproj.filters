@@ -15,15 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
+=======
+    <ClCompile Include="Tested.cpp">
+>>>>>>> tested-branch
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="MainMenu.h">
+=======
+    <ClInclude Include="Tested.h">
+>>>>>>> tested-branch
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
