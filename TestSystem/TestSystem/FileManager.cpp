@@ -1,11 +1,72 @@
 #include "FileManager.h"
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
+#include <windows.h>
+
+namespace
+{
+    std::filesystem::path getCategoriesPath()
+    {
+        char modulePath[MAX_PATH] = {};
+        GetModuleFileNameA(nullptr, modulePath, MAX_PATH);
+
+        std::filesystem::path executablePath(modulePath);
+        return executablePath.parent_path() / "categories.txt";
+    }
+
+    Question makeQuestion(const std::string& text, const std::vector<std::string>& answers, int correctAnswer)
+    {
+        return Question(text, answers, correctAnswer);
+    }
+
+    std::vector<Category> createDefaultCategories()
+    {
+        std::vector<Category> categories;
+
+        Category animals("Animals");
+        animals.setQuestions({
+            makeQuestion("Which animal says \"meow\"?", {"Dog", "Cat", "Cow", "Duck"}, 1),
+            makeQuestion("Which animal is the largest on land?", {"Lion", "Elephant", "Horse", "Monkey"}, 1),
+            makeQuestion("Which animal can fly?", {"Fish", "Bird", "Snake", "Rabbit"}, 1),
+            makeQuestion("Which animal lives in water?", {"Tiger", "Shark", "Fox", "Giraffe"}, 1),
+            makeQuestion("Which animal gives us milk?", {"Cow", "Wolf", "Bear", "Zebra"}, 0)
+            });
+        categories.push_back(animals);
+
+        Category colors("Colors");
+        colors.setQuestions({
+            makeQuestion("What color is the sky on a clear day?", {"Green", "Blue", "Brown", "Pink"}, 1),
+            makeQuestion("What color are bananas?", {"Yellow", "Black", "Purple", "Gray"}, 0),
+            makeQuestion("What color do you get when you mix red and white?", {"Orange", "Pink", "Green", "Blue"}, 1),
+            makeQuestion("What color is grass?", {"Red", "Green", "White", "Blue"}, 1),
+            makeQuestion("What color is coal?", {"Black", "Yellow", "Orange", "Violet"}, 0)
+            });
+        categories.push_back(colors);
+
+        Category school("School");
+        school.setQuestions({
+            makeQuestion("How many days are in a school week?", {"3", "5", "7", "10"}, 1),
+            makeQuestion("Which subject includes numbers and counting?", {"History", "Art", "Math", "Music"}, 2),
+            makeQuestion("What do students use to write with?", {"Spoon", "Pencil", "Plate", "Cup"}, 1),
+            makeQuestion("Where do students usually sit in class?", {"Desk", "Shower", "Garage", "Garden"}, 0),
+            makeQuestion("Which item can carry books?", {"Backpack", "Pillow", "Towel", "Lamp"}, 0)
+            });
+        categories.push_back(school);
+
+        return categories;
+    }
+
+    void loadDefaultCategories(std::vector<Category>& categories)
+    {
+        categories = createDefaultCategories();
+    }
+}
 
 void FileManager::saveCategories(const std::vector<Category>& categories)
 {
-    std::ofstream file("categories.txt");
+    std::ofstream file(getCategoriesPath());
 
     if (!file.is_open())
         return;
@@ -40,15 +101,27 @@ void FileManager::saveCategories(const std::vector<Category>& categories)
 
 void FileManager::loadCategories(std::vector<Category>& categories)
 {
-    std::ifstream file("categories.txt");
+    std::ifstream file(getCategoriesPath());
 
     if (!file.is_open())
+    {
+        loadDefaultCategories(categories);
+        saveCategories(categories);
         return;
+    }
 
     categories.clear();
 
     int categoryCount;
     file >> categoryCount;
+
+    if (file.fail() || categoryCount <= 0)
+    {
+        loadDefaultCategories(categories);
+        saveCategories(categories);
+        return;
+    }
+
     file.ignore();
 
     for (int i = 0; i < categoryCount; i++)
@@ -60,6 +133,14 @@ void FileManager::loadCategories(std::vector<Category>& categories)
 
         int questionCount;
         file >> questionCount;
+
+        if (file.fail() || questionCount < 0)
+        {
+            loadDefaultCategories(categories);
+            saveCategories(categories);
+            return;
+        }
+
         file.ignore();
 
         std::vector<Question> questions;
@@ -71,6 +152,14 @@ void FileManager::loadCategories(std::vector<Category>& categories)
 
             int answersCount;
             file >> answersCount;
+
+            if (file.fail() || answersCount <= 0)
+            {
+                loadDefaultCategories(categories);
+                saveCategories(categories);
+                return;
+            }
+
             file.ignore();
 
             std::vector<std::string> answers;
@@ -84,6 +173,14 @@ void FileManager::loadCategories(std::vector<Category>& categories)
 
             int correctAnswer;
             file >> correctAnswer;
+
+            if (file.fail() || correctAnswer < 0 || correctAnswer >= answersCount)
+            {
+                loadDefaultCategories(categories);
+                saveCategories(categories);
+                return;
+            }
+
             file.ignore();
 
             Question question(questionText, answers, correctAnswer);
