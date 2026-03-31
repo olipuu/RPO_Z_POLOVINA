@@ -1,0 +1,112 @@
+3
+Animals
+5
+Which animal says "meow"?
+4
+Dog
+Cat
+Cow
+Duck
+1
+Which animal is the largest on land?
+4
+Lion
+Elephant
+Horse
+Monkey
+1
+Which animal can fly?
+4
+Fish
+Bird
+Snake
+Rabbit
+1
+Which animal lives in water?
+4
+Tiger
+Shark
+Fox
+Giraffe
+1
+Which animal gives us milk?
+4
+Cow
+Wolf
+Bear
+Zebra
+0
+Colors
+5
+What color is the sky on a clear day?
+4
+Green
+Blue
+Brown
+Pink
+1
+What color are bananas?
+4
+Yellow
+Black
+Purple
+Gray
+0
+What color do you get when you mix red and white?
+4
+Orange
+Pink
+Green
+Blue
+1
+What color is grass?
+4
+Red
+Green
+White
+Blue
+1
+What color is coal?
+4
+Black
+Yellow
+Orange
+Violet
+0
+School
+5
+How many days are in a school week?
+4
+3
+5
+7
+10
+1
+Which subject includes numbers and counting?
+4
+History
+Art
+Math
+Music
+2
+What do students use to write with?
+4
+Spoon
+Pencil
+Plate
+Cup
+1
+Where do students usually sit in class?
+4
+Desk
+Shower
+Garage
+Garden
+0
+Which item can carry books?
+4
+Backpack
+Pillow
+Towel
+Lamp
+0
