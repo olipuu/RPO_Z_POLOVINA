@@ -1,40 +1,40 @@
 # TestSystem
 
-Simple console testing system in C++ with categories and multiple-choice questions.
+Простая консольная система тестирования на C++ с категориями и вопросами с вариантами ответов.
 
-## What Is Included
+## Что есть в проекте
 
-- `TestSystem/TestSystem/TestSystem.vcxproj` - Visual Studio C++ project
-- `TestSystem/TestSystem/categories.txt` - preloaded categories and questions
-- release package with `TestSystem.exe` and `categories.txt`
+- `TestSystem/TestSystem/TestSystem.vcxproj` - проект Visual Studio на C++
+- `TestSystem/TestSystem/categories.txt` - файл с заранее загруженными категориями и вопросами
+- релизный архив с `TestSystem.exe` и `categories.txt`
 
-## Run Ready-Made EXE
+## Запуск готового EXE
 
-1. Open the latest release on GitHub.
-2. Download the release archive.
-3. Extract the archive to any folder.
-4. Make sure `TestSystem.exe` and `categories.txt` stay in the same folder.
-5. Run `TestSystem.exe`.
+1. Откройте последнюю страницу релиза на GitHub.
+2. Скачайте архив релиза.
+3. Распакуйте архив в любую папку.
+4. Убедитесь, что `TestSystem.exe` и `categories.txt` находятся в одной папке.
+5. Запустите `TestSystem.exe`.
 
-## Build In Visual Studio
+## Сборка в Visual Studio
 
-1. Open `TestSystem/TestSystem.slnx` in Visual Studio.
-2. Select `Release` and `x64`.
-3. Build the project.
-4. After the build, run the generated `TestSystem.exe`.
+1. Откройте `TestSystem/TestSystem.slnx` в Visual Studio.
+2. Выберите конфигурацию `Release` и платформу `x64`.
+3. Выполните сборку проекта.
+4. После сборки запустите полученный `TestSystem.exe`.
 
-The build copies `categories.txt` to the output folder automatically.
+Во время сборки файл `categories.txt` автоматически копируется в папку с результатом сборки.
 
-## Preloaded Categories
+## Загруженные категории
 
 - Animals
 - Colors
 - School
 
-Each category contains 5 easy questions in English.
+В каждой категории находится по 5 простых вопросов на английском языке.
 
-## Notes
+## Примечания
 
-- The program stores categories in `categories.txt`.
-- Every question has 4 answer options.
-- Correct answers are stored as zero-based indexes in the file format.
+- Программа хранит категории в файле `categories.txt`.
+- У каждого вопроса 4 варианта ответа.
+- Правильный ответ в файле хранится как индекс от `0` до `3`.
