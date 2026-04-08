@@ -1,4 +1,5 @@
 #include "Administrator.h"
+#include "ConsoleUtils.h"
 #include <iostream>
 #include <string>
 
@@ -79,7 +80,8 @@ void Administrator::editCategory()
 
     while (true)
     {
-        std::cout << "\nCategory: " << categories[index - 1].getName() << std::endl;
+        clearScreen();
+        std::cout << "Category: " << categories[index - 1].getName() << std::endl;
         std::cout << "1 - Show questions\n";
         std::cout << "2 - Add question\n";
         std::cout << "3 - Delete question\n";
@@ -88,15 +90,27 @@ void Administrator::editCategory()
         std::cin >> choice;
 
         if (choice == 1)
+        {
             categories[index - 1].showQuestions();
+            pauseScreen();
+        }
         else if (choice == 2)
+        {
             categories[index - 1].addQuestion();
+            pauseScreen();
+        }
         else if (choice == 3)
+        {
             categories[index - 1].removeQuestion();
+            pauseScreen();
+        }
         else if (choice == 0)
             break;
         else
+        {
             std::cout << "Wrong choice\n";
+            pauseScreen();
+        }
     }
 }
 
@@ -106,7 +120,8 @@ void Administrator::categoryMenu()
 
     while (true)
     {
-        std::cout << "\n--- ADMIN PANEL ---\n";
+        clearScreen();
+        std::cout << "--- ADMIN PANEL ---\n";
         std::cout << "1 - Show categories\n";
         std::cout << "2 - Add category\n";
         std::cout << "3 - Delete category\n";
@@ -116,16 +131,28 @@ void Administrator::categoryMenu()
         std::cin >> choice;
 
         if (choice == 1)
+        {
             showCategories();
+            pauseScreen();
+        }
         else if (choice == 2)
+        {
             addCategory();
+            pauseScreen();
+        }
         else if (choice == 3)
+        {
             removeCategory();
+            pauseScreen();
+        }
         else if (choice == 4)
             editCategory();
         else if (choice == 0)
             break;
         else
+        {
             std::cout << "Wrong choice\n";
+            pauseScreen();
+        }
     }
 }

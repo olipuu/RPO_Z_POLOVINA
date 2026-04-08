@@ -1,4 +1,5 @@
 #include "Category.h"
+#include "ConsoleUtils.h"
 #include <iostream>
 #include <string>
 
@@ -102,21 +103,28 @@ void Category::showQuestions() const
     }
 }
 
-void Category::startTest() const
+int Category::startTest() const
 {
     if (questions.empty())
     {
         std::cout << "There are no questions in this category yet\n";
-        return;
+        pauseScreen();
+        return 0;
     }
 
     int score = 0;
 
     for (int i = 0; i < questions.size(); i++)
     {
+        clearScreen();
+        std::cout << "Category: " << name << std::endl;
+        std::cout << "Question " << i + 1 << " of " << questions.size() << std::endl;
         if (questions[i].ask())
             score++;
     }
 
+    clearScreen();
     std::cout << "\nResult: " << score << " / " << questions.size() << std::endl;
+    pauseScreen();
+    return score;
 }

@@ -1,4 +1,5 @@
 #include "Question.h"
+#include "ConsoleUtils.h"
 #include <iostream>
 
 Question::Question() : correctAnswer(0) {}
@@ -41,11 +42,13 @@ bool Question::ask() const
     if (choice - 1 == correctAnswer)
     {
         std::cout << "Correct!\n";
+        pauseScreen();
         return true;
     }
     else
     {
         std::cout << "Wrong\n";
+        pauseScreen();
         return false;
     }
 }

@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "ConsoleUtils.h"
 #include <iostream>
 
 void MainMenu::run()
@@ -6,15 +7,17 @@ void MainMenu::run()
     fileManager.loadCategories(categories);
 
     Administrator admin(categories);
-    Tested user(categories);
+    Tested user(categories, fileManager);
 
     int choice;
 
     while (true)
     {
-        std::cout << "\n--- MENU ---\n";
+        clearScreen();
+        std::cout << "--- MENU ---\n";
         std::cout << "1 - Admin panel\n";
         std::cout << "2 - Take test\n";
+        std::cout << "3 - View saved results\n";
         std::cout << "0 - Exit\n";
         std::cout << "Your choice: ";
         std::cin >> choice;
@@ -28,6 +31,11 @@ void MainMenu::run()
         {
             user.startTest();
         }
+        else if (choice == 3)
+        {
+            clearScreen();
+            fileManager.showResults();
+        }
         else if (choice == 0)
         {
             fileManager.saveCategories(categories);
@@ -36,6 +44,7 @@ void MainMenu::run()
         else
         {
             std::cout << "Wrong choice\n";
+            pauseScreen();
         }
     }
 }

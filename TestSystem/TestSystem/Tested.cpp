@@ -1,7 +1,8 @@
 #include "Tested.h"
+#include "ConsoleUtils.h"
 #include <iostream>
 
-Tested::Tested(std::vector<Category>& cats) : categories(cats) {}
+Tested::Tested(std::vector<Category>& cats, FileManager& manager) : categories(cats), fileManager(manager) {}
 
 void Tested::showCategories()
 {
@@ -25,6 +26,7 @@ void Tested::startTest()
         return;
     }
 
+    clearScreen();
     showCategories();
 
     int index;
@@ -34,8 +36,10 @@ void Tested::startTest()
     if (index < 1 || index > categories.size())
     {
         std::cout << "Error\n";
+        pauseScreen();
         return;
     }
 
-    categories[index - 1].startTest();
+    int score = categories[index - 1].startTest();
+    fileManager.saveResult(categories[index - 1].getName(), score, static_cast<int>(categories[index - 1].getQuestions().size()));
 }

@@ -1,6 +1,11 @@
 #include "FileManager.h"
+#include "ConsoleUtils.h"
+#include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <windows.h>
@@ -14,6 +19,15 @@ namespace
 
         std::filesystem::path executablePath(modulePath);
         return executablePath.parent_path() / "categories.txt";
+    }
+
+    std::filesystem::path getResultsPath()
+    {
+        char modulePath[MAX_PATH] = {};
+        GetModuleFileNameA(nullptr, modulePath, MAX_PATH);
+
+        std::filesystem::path executablePath(modulePath);
+        return executablePath.parent_path() / "results.txt";
     }
 
     Question makeQuestion(const std::string& text, const std::vector<std::string>& answers, int correctAnswer)
@@ -192,4 +206,66 @@ void FileManager::loadCategories(std::vector<Category>& categories)
     }
 
     file.close();
+}
+
+void FileManager::saveResult(const std::string& categoryName, int score, int totalQuestions)
+{
+    std::ofstream file(getResultsPath(), std::ios::app);
+
+    if (!file.is_open())
+        return;
+
+    std::time_t currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::tm localTime = {};
+    localtime_s(&localTime, &currentTime);
+
+    std::ostringstream timeStream;
+    timeStream << std::put_time(&localTime, "%Y-%m-%d %H:%M:%S");
+
+    file << timeStream.str() << std::endl;
+    file << categoryName << std::endl;
+    file << score << std::endl;
+    file << totalQuestions << std::endl;
+}
+
+void FileManager::showResults() const
+{
+    std::ifstream file(getResultsPath());
+
+    if (!file.is_open())
+    {
+        std::cout << "No saved results yet.\n";
+        pauseScreen();
+        return;
+    }
+
+    std::vector<std::string> lines;
+    std::string line;
+
+    while (std::getline(file, line))
+    {
+        lines.push_back(line);
+    }
+
+    if (lines.empty())
+    {
+        std::cout << "No saved results yet.\n";
+        pauseScreen();
+        return;
+    }
+
+    std::cout << "--- SAVED RESULTS ---\n\n";
+
+    int resultNumber = 1;
+
+    for (int i = 0; i + 3 < lines.size(); i += 4)
+    {
+        std::cout << resultNumber << ". Date: " << lines[i] << std::endl;
+        std::cout << "   Category: " << lines[i + 1] << std::endl;
+        std::cout << "   Score: " << lines[i + 2] << " / " << lines[i + 3] << std::endl;
+        std::cout << std::endl;
+        resultNumber++;
+    }
+
+    pauseScreen();
 }

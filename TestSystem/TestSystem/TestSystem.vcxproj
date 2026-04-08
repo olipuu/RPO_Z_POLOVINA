@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="Administrator.cpp" />
     <ClCompile Include="Category.cpp" />
     <ClCompile Include="FileManager.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="Tested.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="Category.h" />
     <ClInclude Include="FileManager.h" />

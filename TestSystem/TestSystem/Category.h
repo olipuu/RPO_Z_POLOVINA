@@ -23,5 +23,5 @@ public:
     void addQuestion();
     void removeQuestion();
     void showQuestions() const;
-    void startTest() const;
+    int startTest() const;
 };
